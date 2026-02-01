@@ -43,7 +43,7 @@ function SeatPicker({ ev, occupied, onPaid }:{
     if(total) total.textContent = (sel.size * ev.price).toLocaleString("hu-HU");
   };
 
-  const seats: JSX.Element[] = [];
+  const seats: React.ReactNode[] = [];
   for(let r=0;r<ROWS;r++){
     const row = String.fromCharCode(65+r); // A..H
     for(let c=1;c<=COLS;c++){
