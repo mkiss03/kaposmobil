@@ -1,0 +1,12 @@
+{
+  "name": "Kaposvár+",
+  "short_name": "Kaposvár+",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B132B",
+  "theme_color": "#0B132B",
+  "icons": [
+    { "src": "/icon-192x192.svg", "sizes": "192x192", "type": "image/svg+xml" },
+    { "src": "/icon-512x512.svg", "sizes": "512x512", "type": "image/svg+xml" }
+  ]
+}

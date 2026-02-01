@@ -1,26 +1,173 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand: #1e66f5;
+  --ink: #0b132b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --bg: #eef2f7;
+  --card: #ffffff;
+  --phone-w-min: 360px;
+  --phone-w-max: 420px;
+  --nav-h: 72px;
+  --radius: 24px;
+  --shadow: 0 16px 40px rgba(2, 8, 23, 0.15);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*, *:before, *:after {
+  box-sizing: border-box;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Stage centers the phone on desktop */
+.stage {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+}
+
+/* The phone "hardware" */
+.phone {
+  width: clamp(var(--phone-w-min), 92vw, var(--phone-w-max));
+  height: calc(100dvh - 24px);
+  border-radius: 32px;
+  box-shadow: var(--shadow);
+  background: linear-gradient(#f8fafc, #eef2f7);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  position: relative;
+}
+
+.phone-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+}
+
+/* Scrollable content area INSIDE the phone */
+.phone-scroll {
+  flex: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+  padding-bottom: calc(var(--nav-h) + 16px + env(safe-area-inset-bottom));
+}
+
+/* Fixed bottom nav that never scrolls away */
+.bottomnav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(var(--nav-h) + env(safe-area-inset-bottom));
+  padding: 8px max(12px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-right));
+  background: #fff;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  gap: 8px;
+}
+
+.tab {
+  flex: 1;
+  border-radius: 14px;
+  padding: 8px 4px;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 700;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #eaf2ff, #eef6ff);
+  color: #1d4ed8;
+  border-color: #c7d2fe;
+}
+
+/* Cards & buttons */
+.card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(2, 8, 23, 0.06);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  font-weight: 800;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1e66f5, #0ea5e9);
+  border-color: transparent;
+  color: #fff;
+}
+
+.h1 {
+  font-size: 22px;
+  font-weight: 900;
+  margin: 4px 0;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.small {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field__input {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+/* Prevent horizontal overflow globally inside the phone */
+.phone-scroll * {
+  max-width: 100%;
 }
