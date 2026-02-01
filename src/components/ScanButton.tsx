@@ -25,7 +25,7 @@ export default function ScanButton({ onScan, disabled = false }: ScanButtonProps
     try {
       scannerRef.current = new QrScanner(
         videoRef.current,
-        (result) => {
+        (result: any) => {
           try {
             const payload = JSON.parse(result.data);
             if (payload.plate) {
