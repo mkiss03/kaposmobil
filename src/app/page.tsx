@@ -334,7 +334,7 @@ function SlideToStartButton({ onStart, disabled }: SlideToStartProps) {
         }}
         onDrag={(event, info) => {
           if (!containerRef.current) return;
-          const progress = info.x / (containerRef.current.offsetWidth - 60);
+          const progress = info.offset.x / (containerRef.current.offsetWidth - 60);
           setDragProgress(Math.min(Math.max(progress, 0), 1));
 
           if (progress >= 0.95) {
