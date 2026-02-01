@@ -44,7 +44,7 @@ export default function ScanButton({ onScan, disabled = false }: ScanButtonProps
           },
           preferredCamera: 'environment',
           highlightCodeOutlineColor: 'rgb(59, 130, 246)',
-        }
+        } as any
       );
 
       await scannerRef.current.start();
